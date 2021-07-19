@@ -1,0 +1,7 @@
+CREATE TABLE board (
+   id   INTEGER      NOT NULL AUTO_INCREMENT,
+   subject VARCHAR(100) NOT NULL,
+   content VARCHAR(1000) NOT NULL,
+   tag VARCHAR(100) NULL,
+   PRIMARY KEY (id)
+);
