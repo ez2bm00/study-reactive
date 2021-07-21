@@ -10,28 +10,26 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardController {
-
-    private final BoardMapper boardMapper;
+    private final BoardService boardService;
 
     @GetMapping("/{id}")
     public Mono<Board> retrieveBoard(@PathVariable int id) {
-        return boardMapper.findById(id);
+        return boardService.retrieveBoard(id);
     }
 
     @PostMapping
-    public Mono<Board> saveBoard(@RequestBody final Board board) {
-        return boardMapper.save(board);
+    public Mono<Board> writeBoard(@RequestBody final Board board) {
+        return boardService.createBoard(board);
     }
 
     @PutMapping(value = "/{id}")
     public Mono<Board> modifyBoard(@PathVariable int id,
-                                      @RequestBody final Board board) {
-        board.setId(id);
-        return boardMapper.save(board);
+                                   @RequestBody final Board board) {
+        return boardService.updateBoard(id, board);
     }
 
     @DeleteMapping("/{id}")
-    public Mono<Void> deleteBoard(@PathVariable int id) {
-        return boardMapper.deleteById(id);
+    public Mono<Void> removeBoard(@PathVariable int id) {
+        return boardService.deleteBoard(id);
     }
 }
